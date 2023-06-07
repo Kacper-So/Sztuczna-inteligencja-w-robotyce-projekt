@@ -85,7 +85,6 @@ for i in range(1, len(photos)):
             # Dla każdego Bboxa z prev oblicz prawdopodobieństwo że odpowiada on rozważanemu Bboxowi z curr na podstawie:
             # - Intersection over Union
             # - Podobieńśtwa obrazu
-            # - Detekcji ruchu
             # Zbierz dane o aktualnie rozważanych Bboxach
             x1, y1, w1, h1 = bboxes[photos[i]][j]
             x2, y2, w2, h2 = bboxes[prev][k]
@@ -108,12 +107,6 @@ for i in range(1, len(photos)):
             bbox1 = cv2.resize(bbox1, (600, 600))
             bbox2 = cv2.resize(bbox2, (600, 600))
             prob_similarity = cv2.matchTemplate(bbox1, bbox2, cv2.TM_CCOEFF_NORMED)
-
-            # # Oblicz prawdopodobieństwo na podstawie detekcji ruchu
-            flow = cv2.calcOpticalFlowFarneback(prev_gray, curr_gray, None, 0.5, 3, 15, 3, 5, 1.2, 0)
-            flow_mag = np.sqrt(np.sum(flow**2, axis=2))
-            bbox_flow_mag = flow_mag[int(y1):int(y1+h1), int(x1):int(x1+w1)]
-            prob_mv = np.mean(bbox_flow_mag)
 
             # Oblicz prawdopodobieństwo ostateczne z wykorzystaniem wag
             # prob.append(0.3 * prob_IoU + 0.5 * prob_similarity + 0.2 * prob_mv)
@@ -142,5 +135,5 @@ for i in range(1, len(photos)):
     prev = photos[i]
     prev_photo = curr_photo
 
-accuracy = float(counter_correct) / float(counter_absolute)
-print(accuracy)
+# accuracy = float(counter_correct) / float(counter_absolute)
+# print(accuracy)
