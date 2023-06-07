@@ -5,5 +5,6 @@ Dla kolejnych iteracji generowane są macierze o wymiarach {Ilość bboxów w ak
 Prawdopodobieństwa obliczane są na podstawie dwóch wskaźników wziętych z odpowiednią wagą:
 1. wartość wynikająca z intersection over union. Określa w jakiej części bboxy pokrywają się powierzchnią między klatkami,
 2. wartość wynikająca z dopasowania obrazu za pomocą funkcji matchTemplate z biblioteki opencv,
+
 Wyniki generowane są poprzez określenie maksymalnej wartości w kolumnie macierzy, czyli określenie który bbox poprzedniej klatki jest najprawdopodobniej tym samym obiektem co rozważany bbox z aktualnej klatki.
 Jeżeli znalezione prawdopodobieństwo jest niższe niż określona minimalna wartość bbox uznawany jest jako nowy obiekt.
